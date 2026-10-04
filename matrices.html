@@ -1,0 +1,348 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Matrices — Interactive Lesson — SE Maths</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto:wght@300;400;500;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--blue:#8ab4f8;--red:#f28b82;--yellow:#fdd663;--green:#81c995;--purple:#c58af9;--ink:#e8eaed;--sub:#9aa0a6;--paper:#232427;--bg:#131417;--line:#3c4043;--card-shadow:0 1px 2px rgba(0,0,0,.5),0 2px 10px rgba(0,0,0,.4)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;font-family:'Roboto',Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.65;overflow-x:hidden}
+h1,h2,h3,.slide-title{font-family:'Google Sans','Roboto',Arial,sans-serif}
+.hero{background:linear-gradient(120deg,#1a73e8 0%,#7B61FF 45%,#EA4335 100%);color:#fff;padding:52px 24px 38px;position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;right:-60px;top:-60px;width:280px;height:280px;border-radius:50%;background:rgba(255,255,255,.08)}
+.hero-inner{max-width:1100px;margin:0 auto;position:relative;z-index:1}
+.eyebrow{display:inline-block;font-size:12px;letter-spacing:.14em;text-transform:uppercase;background:rgba(255,255,255,.18);padding:6px 12px;border-radius:20px;margin-bottom:16px;font-weight:500}
+.hero h1{font-size:32px;margin:0 0 12px;line-height:1.2}.hero p{font-size:16px;max-width:700px;opacity:.95;margin:0 0 14px}
+.hero-meta{display:flex;gap:20px;flex-wrap:wrap;font-size:13.5px;opacity:.92}
+.path-btn{display:inline-block;margin-top:18px;text-decoration:none;color:#fff;background:rgba(0,0,0,.22);border:1px solid rgba(255,255,255,.28);border-radius:14px;padding:9px 18px;font-size:13.5px;font-weight:600}
+.path-btn:hover{background:rgba(255,255,255,.2)}
+.site-search{margin-top:20px;max-width:440px}
+.site-search input{width:100%;padding:12px 16px;border-radius:14px;border:1px solid rgba(255,255,255,.32);background:rgba(255,255,255,.14);color:#fff;font-size:14.5px}
+.site-search input::placeholder{color:rgba(255,255,255,.78)}.site-search input:focus{outline:none;background:rgba(255,255,255,.22);border-color:#fff}
+.layout{max-width:1180px;margin:20px auto 40px;padding:0 24px;display:grid;grid-template-columns:240px 1fr;gap:30px;align-items:start}
+.layout.one{grid-template-columns:1fr;max-width:1100px}main{min-width:0}
+nav.toc{background:var(--paper);border-radius:16px;box-shadow:var(--card-shadow);padding:16px 10px;position:sticky;top:20px;max-height:calc(100vh - 40px);overflow:auto}
+nav.toc .toc-head{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--sub);padding:4px 14px 10px;font-weight:500}
+nav.toc a{display:block;padding:8px 14px;border-radius:10px;color:var(--ink);text-decoration:none;font-size:13.5px;border-left:3px solid transparent}
+nav.toc a:hover{background:#2c2d30}nav.toc a.active{background:#2a3a55;color:#a8c7fa;border-left-color:var(--blue);font-weight:500}
+.section,.group,.info-card{background:var(--paper);border-radius:18px;box-shadow:var(--card-shadow);padding:30px 34px;margin-bottom:24px;scroll-margin-top:20px}
+.info-card{border-left:4px solid var(--blue);padding:20px 28px}.info-card h2{font-size:17px;margin:0 0 8px}.info-card ul{margin:0;padding-left:20px;color:#c7cbd1;font-size:14px}.info-card b{color:#fff}
+.kicker{display:flex;align-items:center;gap:10px;margin-bottom:16px}
+.num-badge{width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:14px;font-family:'Google Sans',sans-serif;flex:none}
+.section h2,.group h2{font-size:22px;margin:0;line-height:1.25}
+.section p{color:#c7cbd1;font-size:15px;margin:0 0 12px}
+.subhead{font-family:'Google Sans',sans-serif;font-size:15px;font-weight:700;margin:22px 0 8px}
+.slide{background:#1a1b1e;border:1px solid var(--line);border-radius:12px;padding:18px 22px;margin:14px 0}
+.slide-title{font-size:17px;font-weight:700;margin:0 0 8px;color:var(--blue)}
+.slide ul{margin:0;padding-left:20px}.slide li{margin-bottom:6px;font-size:14.5px;color:#c7cbd1}
+.cols-2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.term{font-family:'Roboto Mono',monospace;background:#2c2d30;color:#a8c7fa;padding:1px 6px;border-radius:5px;font-size:.92em}
+.callout{background:#22344d;border-left:4px solid var(--blue);border-radius:10px;padding:12px 16px;font-size:14px;color:#a8c7fa;margin:14px 0}
+.callout.warn{background:#3a3320;border-left-color:var(--yellow);color:#fdd663}.callout.snap{background:#1b2f27;border-left-color:var(--green);color:#cfe9d9}
+.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px;margin:8px 0}
+table.ctable{width:100%;border-collapse:collapse;font-size:13.5px;min-width:480px}
+table.ctable th{background:#1a1b1e;text-align:left;color:#a8c7fa;padding:10px 14px;border-bottom:1px solid var(--line)}
+table.ctable td{padding:10px 14px;border-bottom:1px solid var(--line);color:#c7cbd1}table.ctable tr:last-child td{border-bottom:none}
+.topic-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.topic-link{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);background:#1a1b1e;border:1px solid var(--line);border-radius:10px;padding:11px 14px;font-size:13.5px}
+.topic-link:hover{background:#26282c;border-color:#4a4d52}.topic-link.ready{border-color:#2f5b41}
+.t-num{font-family:'Roboto Mono',monospace;font-size:11.5px;color:var(--sub);background:#2c2d30;border-radius:6px;padding:2px 6px}
+.t-check{margin-left:auto;font-size:11px;font-weight:700;text-transform:uppercase;color:var(--green);background:#1c2b22;border-radius:10px;padding:2px 8px}
+.t-soon{margin-left:auto;font-size:10.5px;text-transform:uppercase;color:var(--sub);background:#2c2d30;border-radius:10px;padding:2px 8px}
+.group-head{display:flex;align-items:center;gap:12px;margin-bottom:14px}.g-range{margin-left:auto;font-size:12px;color:var(--sub)}
+.group p{color:#c7cbd1;font-size:14px;margin:0 0 14px}
+/* matrix tool */
+.tool{background:#1a1b1e;border:1px solid var(--line);border-radius:14px;padding:18px;margin:14px 0}
+.mrow{display:flex;gap:26px;flex-wrap:wrap;align-items:flex-start}
+.mbox label{font-size:12px;color:var(--sub);display:block;margin-bottom:6px}
+.mbox select,.tool input.k{background:#2c2d30;color:var(--ink);border:1px solid var(--line);border-radius:6px;padding:3px 6px;font-size:13px}
+.mx{border-collapse:separate;border-spacing:4px;border-left:2px solid var(--ink);border-right:2px solid var(--ink);border-radius:6px;margin:6px 0}
+.mx input{width:52px;padding:6px 4px;text-align:center;background:#2c2d30;color:var(--ink);border:1px solid var(--line);border-radius:6px;font-family:'Roboto Mono',monospace;font-size:13px}
+.mx td.v{min-width:48px;text-align:center;padding:6px 8px;font-family:'Roboto Mono',monospace;color:var(--green);font-size:14px}
+.btns{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.btn{background:#2a3a55;color:#a8c7fa;border:1px solid #3c5075;border-radius:20px;padding:7px 14px;font-size:13px;cursor:pointer;font-family:inherit}
+.btn:hover,.btn.on{background:#1a73e8;color:#fff}
+.out{margin-top:8px}.steps{font-family:'Roboto Mono',monospace;font-size:12.5px;color:#c7cbd1;background:#0f1012;border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-top:10px;white-space:pre-wrap;overflow-x:auto}
+canvas{background:#0f1012;border:1px solid var(--line);border-radius:12px;max-width:100%}
+.sl{display:grid;grid-template-columns:90px 1fr 46px;gap:8px;align-items:center;font-size:13px;color:#c7cbd1;margin:4px 0}
+/* quiz */
+.q{background:#1a1b1e;border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0}
+.q .qt{font-weight:500;margin-bottom:10px;color:#fff}
+.opt{display:block;width:100%;text-align:left;background:#26282c;color:var(--ink);border:1px solid var(--line);border-radius:9px;padding:9px 12px;margin:6px 0;font-size:14px;cursor:pointer;font-family:inherit}
+.opt:hover{background:#2f3136}.opt.good{background:#1b2f27;border-color:var(--green);color:#cfe9d9}.opt.bad{background:#3a2530;border-color:var(--red);color:#f3b8c2}
+.exp{display:none;margin-top:8px;font-size:13.5px;color:#c7cbd1}.exp.show{display:block}
+.score{font-family:'Google Sans',sans-serif;font-weight:700;color:var(--yellow)}
+details{background:#1a1b1e;border:1px solid var(--line);border-radius:12px;padding:14px 18px;margin:12px 0}
+summary{cursor:pointer;color:#fff;font-weight:500}details .ans{margin-top:10px;padding-top:10px;border-top:1px solid var(--line);font-size:14px;color:#c7cbd1;white-space:pre-wrap}
+.marks{float:right;font-size:12px;color:var(--yellow)}
+footer{text-align:center;color:var(--sub);font-size:12.5px;padding:10px 0 50px}footer a{color:var(--blue);text-decoration:none}
+@media(max-width:900px){.layout{grid-template-columns:1fr;padding:0 16px}nav.toc{position:static;display:flex;overflow-x:auto;max-height:none;gap:4px}nav.toc .toc-head{display:none}nav.toc a{white-space:nowrap}.hero h1{font-size:26px}}
+@media(max-width:560px){.section,.group{padding:20px 16px}.cols-2,.topic-grid{grid-template-columns:1fr}.mx input{width:44px}}
+</style><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Sinhala:wght@400;500;600;700&display=swap" rel="stylesheet"><style>
+.si{font-family:'Noto Sans Sinhala','Roboto',sans-serif}
+.si-toggle{display:inline-flex;align-items:center;gap:7px;background:#2a2b2e;border:1px solid var(--line);color:#a8c7fa;font-family:'Roboto',sans-serif;font-weight:500;font-size:12.5px;padding:7px 13px;border-radius:20px;cursor:pointer;white-space:nowrap;transition:background .15s ease,border-color .15s ease}
+.si-divider{display:flex;align-items:center;gap:14px;margin:26px 0 0}
+.si-divider::before,.si-divider::after{content:'';flex:1;height:1px;background:var(--line)}
+.si-toggle:hover{background:#33343a;border-color:#5f6368}
+.si-toggle .flag{font-size:13px}.si-toggle .arrow{display:inline-block;transition:transform .2s ease;font-size:10px}
+.si-toggle[aria-expanded="true"] .arrow{transform:rotate(180deg)}
+.si-panel{display:none;background:#1c2b22;border:1px solid #2f5b41;border-left:4px solid var(--green);border-radius:10px;padding:16px 20px;margin-top:14px;font-size:14.5px;color:#d3e9db}
+.si-panel.open{display:block;animation:fadeSlide .18s ease}
+@keyframes fadeSlide{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+.section .si-panel p,.info-card .si-panel p{color:#d3e9db;font-size:14.5px;margin:0 0 10px;line-height:1.85}
+.si-panel p:last-child{margin-bottom:0}
+.si-panel .si-label{font-family:'Roboto',sans-serif;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:#7cc99a;font-weight:700;margin-bottom:8px;display:block}
+.si-panel b{color:#fff}
+pre.code{position:relative;background:#0f1012;border:1px solid var(--line);border-left:4px solid var(--blue);border-radius:10px;padding:12px;margin:12px 0 4px;overflow-x:auto;font-family:'Roboto Mono',monospace;font-size:12.5px;line-height:1.6;color:#d7dce2;white-space:pre;tab-size:2}
+pre.code code{font-family:inherit;font-size:inherit;background:none;padding:0;color:inherit}
+.copy-btn{display:block;margin:0 0 8px auto;padding:4px 10px;font-size:11.5px;font-family:'Roboto',sans-serif;color:var(--sub);background:#1a1b1e;border:1px solid var(--line);border-radius:7px;cursor:pointer}
+.copy-btn:hover{background:#2c2d30;color:var(--ink)}.copy-btn.done{color:var(--green);border-color:#2f5b41}
+.why{background:#1a1b1e;border:1px solid var(--line);border-left:4px solid var(--yellow);border-radius:12px;padding:16px 20px;margin:26px 0 4px}
+.why-head{font-family:'Google Sans','Roboto',sans-serif;font-weight:700;font-size:15px;color:var(--yellow);margin-bottom:6px}
+.section .why p,.info-card .why p{margin:0 0 10px;font-size:14px;color:#c7cbd1}
+.why-cols{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:8px 0}
+.why-box{background:#232427;border:1px solid var(--line);border-radius:10px;padding:10px 14px}
+.why-box.se{border-top:3px solid var(--blue)}.why-box.cy{border-top:3px solid var(--red)}
+.why-t{font-weight:700;font-size:13px;margin-bottom:4px;color:#fff}
+.why-box ul{margin:0;padding-left:18px}.why-box li{font-size:13.5px;color:#c7cbd1;margin-bottom:4px}
+.why-code-label{font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--sub);margin:10px 0 0;font-weight:500}
+@media(max-width:700px){.why-cols{grid-template-columns:1fr}}
+</style></head><body>
+<div class="hero"><div class="hero-inner"><span class="eyebrow">Topic 01 · Year 1 Software Engineering Maths</span>
+<h1>Matrices — Interactive Lesson</h1>
+<p>Notation, operations, determinants, inverses, linear systems and 2D transformations — with live calculators, a practice quiz and a sample test with full worked answers.</p>
+<div class="hero-meta"><span>● About 45 minutes</span><span>● 11 quiz questions</span><span>● 6 test questions (26 marks)</span></div>
+<a class="path-btn" href="index.html">🏠 Maths Index</a></div></div>
+<div class="layout"><nav class="toc"><div class="toc-head">On this page</div><a href="#why">★ Why learn this?</a><a href="#overview">1. Overview</a><a href="#basics">2. Basics &amp; types</a><a href="#lab">3. Matrix lab (interactive)</a><a href="#addsub">4. Add, subtract &amp; scalar</a><a href="#mult">5. Multiplication</a><a href="#det">6. Determinant &amp; inverse</a><a href="#sys">7. Linear systems</a><a href="#tf">8. 2D transformations</a><a href="#quiz">9. Practice quiz</a><a href="#test">10. Sample test + answers</a><a href="#cheat">11. Cheat sheet</a></nav><main><section class="section" id="why"><div class="kicker"><div class="num-badge" style="background:var(--yellow);color:#202124">★</div><h2>Why learn this for Python?</h2></div><div class="why" style="margin-top:0"><div class="why-head">🎓 Why your university teaches this</div><p>Your university teaches this maths in the first-year Software Development module to support the Python programming module. A matrix is how Python (and NumPy, pandas and machine-learning libraries) stores and processes tables of numbers.</p><div class="why-cols"><div class="why-box se"><div class="why-t">💻 Software engineering</div><ul><li>Images, game boards and spreadsheets are matrices in memory</li><li>Graphics and game engines transform every point with matrix multiplication</li><li>Neural networks are mostly matrix multiplication</li><li>Database tables and DataFrames are tables of data, just like matrices</li></ul></div><div class="why-box cy"><div class="why-t">🛡️ Cybersecurity</div><ul><li>Classical ciphers such as the Hill cipher encrypt with matrices</li><li>Networks are stored as adjacency matrices to show which hosts can reach which</li><li>Intrusion-detection models read rows of numeric features from traffic logs</li><li>Image forensics and steganography work on pixel matrices</li></ul></div></div></div><div class="si-divider"><button class="si-toggle" type="button" data-target="si-matrix-why" aria-expanded="false"><span class="flag">🇱🇰</span> <span class="si">සිංහල</span> <span class="arrow">▾</span></button></div><div class="si-panel" id="si-matrix-why"><span class="si-label si">සිංහල විස්තරය</span><p class="si"><b>මෙම පාඩම ඇයි ඉගෙන ගන්නේ:</b> ඔබේ විශ්වවිද්‍යාලයේ පළමු වසරේ Software Development module එකේදී මෙම maths කොටස උගන්වන්නේ Python programming module එකට උපකාර වීමටයි. Matrix (න්‍යාසය) යනු සංඛ්‍යා පේළි සහ තීරු වශයෙන් සකස් කළ වගුවකි. Python වල list of lists, NumPy arrays සහ pandas DataFrame යනු මෙම අදහසම ක්‍රියාත්මක කරන ආකාරයන් ය.</p><p class="si"><b>Software Engineering අංශයේදී:</b> රූපයක් යනු pixel වල matrix එකකි; game එකක board එක, spreadsheet එකක් සහ database table එකක් ද එසේමය. 3D graphics සහ games වලදී සෑම point එකක්ම matrix ගුණ කිරීමෙන් භ්‍රමණය කිරීම, විශාල කිරීම සිදු කරයි. Machine learning වල neural network එකක් බොහෝ දුරට matrix ගුණ කිරීම් මාලාවකි.</p><p class="si"><b>Cybersecurity අංශයේදී:</b> Hill cipher වැනි ක්‍රමවල encryption සිදු කරන්නේ matrix මගිනි. Network එකක කුමන computer එකට කුමන computer එකට සම්බන්ධ විය හැකිද යන්න adjacency matrix එකකින් ගබඩා කරයි. Intrusion detection මොඩල සඳහා traffic log වලින් ලබාගන්නා සංඛ්‍යා පේළි (matrix) ආදානය ලෙස ලබා දෙයි. Image forensics සහ steganography ද pixel matrix මත ක්‍රියා කරයි.</p><p class="si"><b>භාවිතා කරන ආකාරය:</b> සෑම කොටසකම යටින් 🐍 Python පෙට්ටියක් සහ සිංහල විස්තරයක් ඇත. මුලින් කියවන්න, පසුව interactive tool එකෙන් උත්සාහ කරන්න, අවසානයේ quiz සහ sample test එක කරන්න.</p></div></section><section class="section" id="overview"><div class="kicker"><div class="num-badge" style="background:var(--blue)">1</div><h2>Overview</h2></div><p>A <b>matrix</b> is a rectangular grid of numbers. In software engineering you meet them everywhere: transforming points in graphics and games, storing neural-network weights, representing graphs, and solving systems of equations.</p>
+<div class="cols-2"><div class="slide"><div class="slide-title">You will learn</div><ul><li>Notation and matrix types</li><li>Add, subtract, scale, transpose</li><li>Multiply matrices</li><li>Determinants and inverses</li><li>Solve linear systems</li></ul></div>
+<div class="slide"><div class="slide-title">How to study</div><ul><li>Use the <b>Matrix lab</b> to check every hand calculation</li><li>Do the <b>quiz</b> for instant feedback</li><li>Attempt the <b>sample test</b> on paper first</li></ul></div></div><div class="why"><div class="why-head">🐍 Why this matters for Python</div><p>In Python a matrix is a list of lists. NumPy and pandas build on exactly this idea, so knowing the maths tells you what your code is really doing.</p><div class="why-cols"><div class="why-box se"><div class="why-t">💻 Software engineering</div><ul><li>Images, game boards and spreadsheets are matrices stored in memory</li><li>Machine-learning code is mostly matrix operations</li></ul></div><div class="why-box cy"><div class="why-t">🛡️ Cybersecurity</div><ul><li>Ciphers and network maps are stored as matrices</li><li>Detection models read rows of numeric features from logs</li></ul></div></div><div class="why-code-label">🐍 Python example</div><pre class="code"><button class="copy-btn" type="button">Copy</button><code>A = [[2, 1],
+     [0, 3]]
+print(A[0][1])   # 1</code></pre></div><div class="si-divider"><button class="si-toggle" type="button" data-target="si-matrix-overview" aria-expanded="false"><span class="flag">🇱🇰</span> <span class="si">සිංහල</span> <span class="arrow">▾</span></button></div><div class="si-panel" id="si-matrix-overview"><span class="si-label si">සිංහල විස්තරය</span><p class="si"><b>Matrix (න්‍යාසය) යනු:</b> සංඛ්‍යා පේළි (rows) සහ තීරු (columns) වශයෙන් සෘජුකෝණාස්‍රාකාරව සකස් කළ වගුවකි. සංඛ්‍යා පමණක් ඇති spreadsheet කොටසක් ලෙස සිතන්න. මෙම පාඩමේදී අපි matrix එකක් කියවන ආකාරය, එකතු කිරීම, අඩු කිරීම, ගුණ කිරීම, determinant, inverse, සමීකරණ විසඳීම සහ 2D රූප භ්‍රමණය ඉගෙන ගන්නෙමු.</p><p class="si"><b>Python සමඟ සම්බන්ධය:</b> Python වල matrix එකක් ලියන්නේ list එකක් ඇතුළත list වශයෙනි (උදා: [[2,1],[0,3]]). ඉන්පසු NumPy, pandas වැනි library මගින් මෙම වගු ඉතා වේගයෙන් ගණනය කරයි. මෙම maths දැනගත් විට එම library එක ඇතුළත සිදුවන්නේ මොනවාදැයි ඔබට තේරුම් ගත හැක.</p><p class="si"><b>Software Engineering:</b> රූපයක් යනු pixel වල matrix එකකි; game board එකක් සහ database table එකක් ද එසේමය. Machine learning වල ගණනය කිරීම් බහුතරයක් matrix ක්‍රියා වේ. <b>Cybersecurity:</b> encryption ක්‍රම, network සිතියම් සහ log වලින් ගන්නා සංඛ්‍යා දත්ත matrix ආකාරයෙන් ගබඩා කර විශ්ලේෂණය කරයි.</p></div></section><section class="section" id="basics"><div class="kicker"><div class="num-badge" style="background:var(--green)">2</div><h2>Basics &amp; types</h2></div><div class="callout snap"><b>Brand new to this? Start here.</b> Think of a matrix as a <b>spreadsheet with only numbers</b>. Rows run <b>across</b> (→), columns run <b>down</b> (↓). Always say <b>row first, then column</b>: &ldquo;row 2, column 1&rdquo; means go down 2, then across 1.</div>
+<div class="slide"><div class="slide-title">Reading a matrix</div><ul><li>A = [[2,1],[0,3]] means row 1 is <span class="term">2 1</span> and row 2 is <span class="term">0 3</span>.</li><li>Size is written <b>rows × columns</b>. Two rows and three columns = a 2×3 matrix (say &ldquo;2 by 3&rdquo;).</li><li>Each number is an <b>entry</b>. a<sub>21</sub> = 0 means &ldquo;row 2, column 1&rdquo;.</li></ul></div>
+<p>A matrix with <b>m rows</b> and <b>n columns</b> has size <span class="term">m × n</span>. The entry in row <i>i</i>, column <i>j</i> is written <span class="term">a<sub>ij</sub></span>. Example: A = [[2,1],[0,3]] is 2×2, and a<sub>12</sub> = 1.</p>
+<div class="table-wrap"><table class="ctable"><tr><th>Type</th><th>Definition</th><th>Example</th></tr>
+<tr><td>Square</td><td>m = n</td><td>[[1,2],[3,4]]</td></tr><tr><td>Identity I</td><td>1s on diagonal, 0 elsewhere; AI = IA = A</td><td>[[1,0],[0,1]]</td></tr>
+<tr><td>Zero</td><td>all entries 0</td><td>[[0,0],[0,0]]</td></tr><tr><td>Diagonal</td><td>non-zero only on the diagonal</td><td>[[3,0],[0,5]]</td></tr>
+<tr><td>Symmetric</td><td>Aᵀ = A</td><td>[[1,7],[7,2]]</td></tr><tr><td>Upper triangular</td><td>zeros below the diagonal</td><td>[[1,2],[0,3]]</td></tr></table></div>
+<div class="callout">Two matrices are equal only if they have the <b>same size</b> and all matching entries are equal.</div><div class="why"><div class="why-head">🐍 Why this matters for Python</div><p>Row and column positions become list indexes. Python counts from 0, so maths 'row 1, column 2' is A[0][1].</p><div class="why-cols"><div class="why-box se"><div class="why-t">💻 Software engineering</div><ul><li>Reading and writing the right cell is the core of image, grid and table code</li><li>Off-by-one index mistakes are the most common bug here</li></ul></div><div class="why-box cy"><div class="why-t">🛡️ Cybersecurity</div><ul><li>Adjacency matrix: entry (i, j) = 1 means host i can reach host j</li><li>Pixel grids are where hidden data is searched for in image forensics</li></ul></div></div><div class="why-code-label">🐍 Python example</div><pre class="code"><button class="copy-btn" type="button">Copy</button><code>A = [[1, 2, 3],
+     [4, 5, 6]]
+rows, cols = len(A), len(A[0])
+print(rows, &quot;x&quot;, cols)   # 2 x 3
+print(A[1][2])           # 6  (maths: row 2, column 3)</code></pre></div><div class="si-divider"><button class="si-toggle" type="button" data-target="si-matrix-basics" aria-expanded="false"><span class="flag">🇱🇰</span> <span class="si">සිංහල</span> <span class="arrow">▾</span></button></div><div class="si-panel" id="si-matrix-basics"><span class="si-label si">සිංහල විස්තරය</span><p class="si"><b>Matrix එකක් කියවන ආකාරය:</b> පේළි (rows) වමේ සිට දකුණට තිරස් අතට ඇති ඒවාය; තීරු (columns) උඩ සිට පහළට සිරස් අතට ඇති ඒවාය. ප්‍රමාණය (size) ලියන්නේ පේළි × තීරු ලෙසයි. පේළි 2ක් සහ තීරු 3ක් ඇති matrix එක 2×3 ලෙස කියවයි. a₂₁ යනු 2 වන පේළියේ 1 වන තීරුවේ ඇති අගයයි — සෑම විටම පළමුව පේළිය, ඉන්පසු තීරුව.</p><p class="si"><b>වර්ග:</b> Square (පේළි = තීරු), Identity matrix (I — විකර්ණයේ 1 ද අනෙක් තැන් 0 ද), Zero matrix (සියල්ල 0), Diagonal, Symmetric (Aᵀ = A), Upper triangular. Identity matrix එක සාමාන්‍ය සංඛ්‍යා වල '1' හා සමානය: A × I = A. matrix දෙකක් සමාන වන්නේ ප්‍රමාණය සමාන වී සියලු අනුරූප අගයන් සමාන වන විට පමණි.</p><p class="si"><b>Python වලදී:</b> Maths වල පේළි ගණන් කිරීම 1 සිට ආරම්භ වුවත් Python වල index 0 සිට ආරම්භ වේ. එබැවින් 'පේළිය 2, තීරුව 3' යනු A[1][2] වේ. rows = len(A), cols = len(A[0]) ලෙස ප්‍රමාණය ලබා ගත හැක. Index එක එකකින් වැරදීම (off-by-one) මෙහි සිදුවන සාමාන්‍ය දෝෂයකි. <b>Cybersecurity:</b> network එකක කුමන host එකට කුමන host එකට සම්බන්ධ විය හැකිද යන්න adjacency matrix එකකින් දක්වයි (i වන host එකට j වන host එකට යා හැකි නම් අගය 1 වේ).</p></div></section><section class="section" id="lab"><div class="kicker"><div class="num-badge" style="background:var(--red)">3</div><h2>Matrix lab (interactive)</h2></div><p>Edit the entries of <b>A</b> and <b>B</b> (sizes up to 3×3), then pick an operation. The result and the working appear below.</p>
+<div class="tool"><div class="mrow"><div class="mbox" id="boxA"></div><div class="mbox" id="boxB"></div>
+<div class="mbox"><label>Scalar k</label><input class="k" id="k" type="number" value="2" style="width:70px"></div></div>
+<div class="btns" id="ops"><button class="btn" data-op="add">A + B</button><button class="btn" data-op="sub">A − B</button><button class="btn" data-op="scale">k·A</button><button class="btn" data-op="mul">A × B</button><button class="btn" data-op="tr">Aᵀ</button><button class="btn" data-op="det">det(A)</button><button class="btn" data-op="inv">A⁻¹</button></div>
+<div class="out" id="out">Choose an operation above.</div><div class="steps" id="steps">Working will appear here.</div></div>
+<div class="callout warn">Addition/subtraction need <b>equal sizes</b>. Multiplication needs <b>columns of A = rows of B</b>. Determinant and inverse need a <b>square</b> matrix.</div><div class="why"><div class="why-head">🐍 Why this matters for Python</div><p>The lab lets you check hand calculations before and after you write the Python version.</p><div class="why-cols"><div class="why-box se"><div class="why-t">💻 Software engineering</div><ul><li>Comparing your function with a trusted calculator is manual testing</li><li>Edge cases (wrong sizes, singular matrices) are what real programs must handle</li></ul></div><div class="why-box cy"><div class="why-t">🛡️ Cybersecurity</div><ul><li>One arithmetic slip in a cipher or hash routine makes it useless or exploitable, so verify it</li><li>Input validation (size checks) stops bad data crashing your code</li></ul></div></div><div class="why-code-label">🐍 Python example</div><pre class="code"><button class="copy-btn" type="button">Copy</button><code>def show(M):
+    for row in M:
+        print(row)
+
+show([[2, 1], [0, 3]])
+# [2, 1]
+# [0, 3]</code></pre></div><div class="si-divider"><button class="si-toggle" type="button" data-target="si-matrix-lab" aria-expanded="false"><span class="flag">🇱🇰</span> <span class="si">සිංහල</span> <span class="arrow">▾</span></button></div><div class="si-panel" id="si-matrix-lab"><span class="si-label si">සිංහල විස්තරය</span><p class="si"><b>Matrix lab එක භාවිතය:</b> A සහ B matrix වල අගයන් වෙනස් කර, ක්‍රියාවක් (A + B, A × B, det, inverse ආදිය) තෝරන්න. ප්‍රතිඵලය සහ පියවරෙන් පියවර ගණනය කිරීම පහතින් පෙනේ. ඔබ අතින් කළ ගණනය කිරීම මෙයින් සසඳා බලන්න.</p><p class="si"><b>වැදගත් නීති:</b> එකතු/අඩු කිරීම සඳහා matrix දෙකේම ප්‍රමාණය සමාන විය යුතුය. ගුණ කිරීමට A හි තීරු ගණන B හි පේළි ගණනට සමාන විය යුතුය. Determinant සහ inverse සඳහා square matrix එකක් අවශ්‍යයි. නීති කඩ වන විට tool එක 'not defined' ලෙස පෙන්වයි.</p><p class="si"><b>Python සඳහා වැදගත්කම:</b> Program එකක් ලියන විට වැරදි ප්‍රමාණයේ දත්ත ලැබෙන අවස්ථා හඳුනාගෙන ඒවාට error message දිය යුතුය — මෙය input validation ලෙස හැඳින්වේ. ඔබේ Python function එකේ ප්‍රතිඵලය විශ්වාසදායක calculator එකක ප්‍රතිඵලයට සමානදැයි බැලීම manual testing වේ. Cybersecurity වලදී සංකේතන (encryption) කේතයේ එක් ගණිත වැරැද්දක් පවා පද්ධතිය අනාරක්ෂිත කරයි, ඒ නිසා ප්‍රතිඵල සත්‍යාපනය කිරීම අත්‍යවශ්‍යයි.</p></div></section><section class="section" id="addsub"><div class="kicker"><div class="num-badge" style="background:var(--yellow)">4</div><h2>Add, subtract &amp; scalar</h2></div><div class="callout snap"><b>The big idea:</b> adding and subtracting matrices is just adding or subtracting <b>matching boxes</b>. If you can add two numbers, you can do this.</div>
+<div class="subhead">1. Addition: add the boxes in the same position</div>
+<p>Line the two matrices up on top of each other. Box (1,1) pairs with box (1,1), box (1,2) with box (1,2), and so on. Add each pair.</p>
+<div class="slide"><div class="slide-title">Worked example: A + B</div>
+<p style="font-family:'Roboto Mono',monospace;font-size:13.5px;color:#c7cbd1">A = [[2, 1],[0, 3]] &nbsp; B = [[5, 4],[2, 1]]</p>
+<ul><li>Top-left: 2 + 5 = <b>7</b></li><li>Top-right: 1 + 4 = <b>5</b></li><li>Bottom-left: 0 + 2 = <b>2</b></li><li>Bottom-right: 3 + 1 = <b>4</b></li></ul>
+<p style="font-family:'Roboto Mono',monospace;color:#81c995">A + B = [[7, 5],[2, 4]]</p></div>
+<div class="subhead">2. Subtraction: same, but subtract</div>
+<p>Take the box from the <b>first</b> matrix minus the box from the <b>second</b>. Order matters: A − B is not the same as B − A.</p>
+<div class="slide"><div class="slide-title">Worked example: A − B (same A and B)</div>
+<ul><li>2 − 5 = <b>−3</b> &nbsp; 1 − 4 = <b>−3</b></li><li>0 − 2 = <b>−2</b> &nbsp; 3 − 1 = <b>2</b></li></ul>
+<p style="font-family:'Roboto Mono',monospace;color:#81c995">A − B = [[−3, −3],[−2, 2]]</p></div>
+<div class="callout warn"><b>The size rule:</b> you can only add or subtract matrices that are <b>exactly the same size</b>. A 2×2 plus a 2×3 has no matching boxes for the third column, so it is <b>not defined</b>. Think of it as trying to add a 4-seat table to a 6-seat table, seat by seat.</div>
+<div class="subhead">3. Scalar multiplication: multiply every box by one number</div>
+<p>A <b>scalar</b> is just an ordinary number (like 2 or −3). To multiply a matrix by it, multiply <b>every</b> entry. The matrix size doesn&rsquo;t change.</p>
+<div class="slide"><div class="slide-title">Worked example: 3A</div>
+<p style="font-family:'Roboto Mono',monospace;font-size:13.5px;color:#c7cbd1">A = [[2, 1],[0, 3]]</p>
+<ul><li>3×2 = <b>6</b> &nbsp; 3×1 = <b>3</b></li><li>3×0 = <b>0</b> &nbsp; 3×3 = <b>9</b></li></ul>
+<p style="font-family:'Roboto Mono',monospace;color:#81c995">3A = [[6, 3],[0, 9]]</p></div>
+<p><b>Combining them:</b> do the scalar part first, then add or subtract. Example: 2A − B, with A and B as above: 2A = [[4,2],[0,6]], then subtract B = [[5,4],[2,1]] to get [[−1,−2],[−2,5]].</p>
+<div class="subhead">Rules that always hold</div>
+<div class="table-wrap"><table class="ctable"><tr><th>Rule</th><th>In words</th></tr>
+<tr><td>A + B = B + A</td><td>Order doesn&rsquo;t matter for addition (but it <b>does</b> for subtraction)</td></tr>
+<tr><td>A + 0 = A</td><td>Adding the zero matrix changes nothing</td></tr>
+<tr><td>k(A + B) = kA + kB</td><td>You can distribute a scalar</td></tr>
+<tr><td>A − A = 0</td><td>Every box cancels to zero</td></tr></table></div>
+<div class="subhead">Try it yourself</div>
+<div class="tool"><div class="btns"><button class="btn" id="gen">🎲 New random problem</button><button class="btn" id="loadAS">Load example A, B into the lab</button></div>
+<div id="prob" style="margin:10px 0;font-size:15px;color:#fff"></div>
+<div id="probA" class="mrow"></div>
+<div class="btns"><button class="btn" id="chk">Check my answer</button><button class="btn" id="showAns">Show answer</button></div>
+<div id="probFb" class="steps" style="white-space:pre-wrap">Press &ldquo;New random problem&rdquo;, work it out on paper, type your answer in the boxes, then check.</div></div>
+<div class="subhead">Common mistakes</div>
+<div class="slide accent-red"><ul><li>Adding matrices of different sizes (always check sizes first).</li><li>Forgetting to multiply <b>every</b> entry by the scalar, not just the first.</li><li>Mixing up signs when subtracting a negative: 3 − (−2) = <b>5</b>.</li><li>Doing A − B as B − A.</li></ul></div><div class="why"><div class="why-head">🐍 Why this matters for Python</div><p>Adding matrices is a nested loop or list comprehension that pairs up the cells in the same position.</p><div class="why-cols"><div class="why-box se"><div class="why-t">💻 Software engineering</div><ul><li>Blending two images or changing brightness is matrix addition and scalar multiplication</li><li>Game physics adds position and velocity values every frame</li></ul></div><div class="why-box cy"><div class="why-t">🛡️ Cybersecurity</div><ul><li>Subtracting a baseline traffic table from today's table highlights anomalies</li><li>Combining log-count tables from several servers is matrix addition</li></ul></div></div><div class="why-code-label">🐍 Python example</div><pre class="code"><button class="copy-btn" type="button">Copy</button><code>A = [[2, 1], [0, 3]]
+B = [[5, 4], [2, 1]]
+C = [[A[i][j] + B[i][j] for j in range(2)] for i in range(2)]
+print(C)                                    # [[7, 5], [2, 4]]
+k = 3
+print([[k * x for x in row] for row in A])  # [[6, 3], [0, 9]]</code></pre></div><div class="si-divider"><button class="si-toggle" type="button" data-target="si-matrix-addsub" aria-expanded="false"><span class="flag">🇱🇰</span> <span class="si">සිංහල</span> <span class="arrow">▾</span></button></div><div class="si-panel" id="si-matrix-addsub"><span class="si-label si">සිංහල විස්තරය</span><p class="si"><b>එකතු කිරීම:</b> එකම ප්‍රමාණයේ matrix දෙකක් එකක් මත එකක් තබා, එකම ස්ථානයේ ඇති අගයන් එකතු කරයි. උදා: A = [[2,1],[0,3]] සහ B = [[5,4],[2,1]] නම් A + B = [[7,5],[2,4]] (2+5=7, 1+4=5, 0+2=2, 3+1=4). අඩු කිරීමේදී පළමු matrix එකේ අගයෙන් දෙවැන්නේ අගය අඩු කරයි; ඒ නිසා A − B සහ B − A වෙනස් ය.</p><p class="si"><b>ප්‍රමාණ නීතිය සහ scalar:</b> ප්‍රමාණය වෙනස් matrix දෙකක් එකතු කළ නොහැක — ගැළපෙන කොටු නොමැති නිසා. Scalar ගුණ කිරීමේදී (උදා: 3A) matrix එකේ සෑම අගයක්ම එම සංඛ්‍යාවෙන් ගුණ කරයි; matrix එකේ ප්‍රමාණය වෙනස් නොවේ. සාමාන්‍ය වැරදි: සියලු අගයන් ගුණ කිරීම අමතක වීම සහ ඍණ ලකුණු (3 − (−2) = 5) වැරදි වීම.</p><p class="si"><b>Python සහ ක්ෂේත්‍රය:</b> Python වලදී මෙය nested for loop එකකින් හෝ list comprehension එකකින් ලියයි. Software Engineering වලදී රූප දෙකක් මිශ්‍ර කිරීම හෝ රූපයක brightness වෙනස් කිරීම මෙම ක්‍රියා වේ. Cybersecurity වලදී සාමාන්‍ය දිනයක network traffic වගුවෙන් අද දිනයේ වගුව අඩු කිරීමෙන් අසාමාන්‍ය ඉහළ යෑම් (anomalies) හඳුනාගත හැක.</p></div></section><section class="section" id="mult"><div class="kicker"><div class="num-badge" style="background:var(--yellow)">5</div><h2>Multiplication</h2></div><p>Each entry of C = AB is the <b>dot product of a row of A with a column of B</b>:</p>
+<div class="slide"><div class="slide-title">c<sub>ij</sub> = a<sub>i1</sub>b<sub>1j</sub> + a<sub>i2</sub>b<sub>2j</sub> + … + a<sub>in</sub>b<sub>nj</sub></div>
+<ul><li>(m×n)·(n×p) gives an <b>m×p</b> matrix.</li><li><b>Not commutative:</b> AB ≠ BA in general.</li><li>Associative: (AB)C = A(BC). Transpose: (AB)ᵀ = BᵀAᵀ.</li></ul></div>
+<div class="callout snap"><b>Plain English:</b> to get one box of the answer, take a <b>row</b> from the first matrix and a <b>column</b> from the second. Multiply the pairs in order (first×first, second×second&hellip;), then <b>add them up</b>. Repeat for every box. This is harder than addition, so go slowly.</div>
+<div class="callout warn"><b>Size rule:</b> the number of <b>columns</b> in A must equal the number of <b>rows</b> in B (the &ldquo;inner numbers&rdquo; match). Example: 2×<b>3</b> times <b>3</b>×4 works and gives 2×4.</div>
+<div class="subhead">Worked example</div>
+<p>A = [[2,1],[0,3]], B = [[1,4],[2,−1]]. Then c<sub>11</sub> = 2·1 + 1·2 = 4, c<sub>12</sub> = 2·4 + 1·(−1) = 7, c<sub>21</sub> = 0·1 + 3·2 = 6, c<sub>22</sub> = 0·4 + 3·(−1) = −3, so AB = [[4,7],[6,−3]]. Load these into the Matrix lab and press <span class="term">A × B</span> to see every dot product.</p>
+<div class="btns"><button class="btn" id="loadEx">Load this example into the lab</button></div><div class="why"><div class="why-head">🐍 Why this matters for Python</div><p>Matrix multiplication is three nested loops (or a sum inside a comprehension). Writing it once yourself shows why it is slow and why NumPy exists.</p><div class="why-cols"><div class="why-box se"><div class="why-t">💻 Software engineering</div><ul><li>Neural networks are chains of matrix multiplications</li><li>3D graphics and games transform every vertex with a matrix product</li></ul></div><div class="why-box cy"><div class="why-t">🛡️ Cybersecurity</div><ul><li>The Hill cipher encrypts text by multiplying with a key matrix (mod 26)</li><li>Powers of an adjacency matrix count paths between hosts, useful for attack-path analysis</li></ul></div></div><div class="why-code-label">🐍 Python example</div><pre class="code"><button class="copy-btn" type="button">Copy</button><code>def matmul(A, B):
+    n, m, p = len(A), len(B), len(B[0])
+    return [[sum(A[i][k] * B[k][j] for k in range(m))
+             for j in range(p)] for i in range(n)]
+
+A = [[2, 1], [0, 3]]
+B = [[1, 4], [2, -1]]
+print(matmul(A, B))   # [[4, 7], [6, -3]]</code></pre></div><div class="si-divider"><button class="si-toggle" type="button" data-target="si-matrix-mult" aria-expanded="false"><span class="flag">🇱🇰</span> <span class="si">සිංහල</span> <span class="arrow">▾</span></button></div><div class="si-panel" id="si-matrix-mult"><span class="si-label si">සිංහල විස්තරය</span><p class="si"><b>ගුණ කිරීම ක්‍රියා කරන ආකාරය:</b> ප්‍රතිඵල matrix එකේ එක් අගයක් ලබා ගැනීමට A හි පේළියක් සහ B හි තීරුවක් ගන්න. අනුරූප අගයන් එකිනෙක ගුණ කර (පළමුව×පළමුව, දෙවැන්න×දෙවැන්න...) ඒවා එකතු කරන්න. උදා: A = [[2,1],[0,3]], B = [[1,4],[2,−1]] සඳහා c₁₁ = 2·1 + 1·2 = 4, c₁₂ = 2·4 + 1·(−1) = 7, c₂₁ = 0·1 + 3·2 = 6, c₂₂ = 0·4 + 3·(−1) = −3.</p><p class="si"><b>නීති:</b> A හි තීරු ගණන B හි පේළි ගණනට සමාන විය යුතුය (අභ්‍යන්තර සංඛ්‍යා සමාන). (m×n) × (n×p) = m×p. AB සහ BA සාමාන්‍යයෙන් සමාන නොවේ — ගුණ කිරීමේ අනුපිළිවෙල වැදගත් ය. (AB)ᵀ = BᵀAᵀ වේ.</p><p class="si"><b>Python සහ ක්ෂේත්‍රය:</b> Python වලදී for loop තුනකින් මෙය ලිවිය හැක; එය ඉතා මන්දගාමී බව දැනගත් විට NumPy වැනි library වල වැදගත්කම වැටහේ. Neural network එකක් යනු matrix ගුණ කිරීම් මාලාවකි. Cybersecurity වලදී Hill cipher මගින් අකුරු සංඛ්‍යා බවට හරවා key matrix එකකින් ගුණ කර (mod 26) සංකේතනය කරයි. තවද network එකක adjacency matrix එක තමා සමඟම ගුණ කිරීමෙන් hosts අතර මාර්ග ගණන සොයා ගත හැක.</p></div></section><section class="section" id="det"><div class="kicker"><div class="num-badge" style="background:var(--purple)">6</div><h2>Determinant &amp; inverse</h2></div><div class="slide"><div class="slide-title">Determinant</div><ul>
+<li>2×2: det [[a,b],[c,d]] = <b>ad − bc</b></li>
+<li>3×3: expand along row 1: a(ei − fh) − b(di − fg) + c(dh − eg)</li>
+<li>det = 0 ⇒ matrix is <b>singular</b> (no inverse). |det| is the area/volume scaling factor.</li></ul></div>
+<div class="slide"><div class="slide-title">Inverse</div><ul>
+<li>A⁻¹ exists only if det(A) ≠ 0, and AA⁻¹ = A⁻¹A = I.</li>
+<li>2×2: A⁻¹ = (1/(ad − bc)) · [[d, −b],[−c, a]]</li>
+<li>Larger: A⁻¹ = (1/det A) · adj(A). Also (AB)⁻¹ = B⁻¹A⁻¹.</li></ul></div>
+<div class="callout snap">Try it: put [[2,1],[5,3]] in A and press <b>det(A)</b> then <b>A⁻¹</b>. det = 1, so the inverse is [[3,−1],[−5,2]].</div><div class="why"><div class="why-head">🐍 Why this matters for Python</div><p>Determinant and inverse become two small functions. The check det == 0 is exactly the guard that stops a divide-by-zero crash.</p><div class="why-cols"><div class="why-box se"><div class="why-t">💻 Software engineering</div><ul><li>Checking det ≠ 0 before inverting avoids crashes and nonsense results</li><li>The determinant is the area (or volume) scale factor of a transformation</li></ul></div><div class="why-box cy"><div class="why-t">🛡️ Cybersecurity</div><ul><li>A Hill cipher key matrix must be invertible (mod 26) or messages cannot be decrypted</li><li>Decryption is literally multiplying by the inverse matrix</li></ul></div></div><div class="why-code-label">🐍 Python example</div><pre class="code"><button class="copy-btn" type="button">Copy</button><code>def det2(M):
+    return M[0][0] * M[1][1] - M[0][1] * M[1][0]
+
+def inv2(M):
+    d = det2(M)
+    if d == 0:
+        raise ValueError(&quot;singular: no inverse&quot;)
+    return [[ M[1][1] / d, -M[0][1] / d],
+            [-M[1][0] / d,  M[0][0] / d]]
+
+print(det2([[2, 1], [5, 3]]))   # 1
+print(inv2([[2, 1], [5, 3]]))   # [[3.0, -1.0], [-5.0, 2.0]]</code></pre></div><div class="si-divider"><button class="si-toggle" type="button" data-target="si-matrix-det" aria-expanded="false"><span class="flag">🇱🇰</span> <span class="si">සිංහල</span> <span class="arrow">▾</span></button></div><div class="si-panel" id="si-matrix-det"><span class="si-label si">සිංහල විස්තරය</span><p class="si"><b>Determinant (නිශ්චායකය):</b> 2×2 matrix [[a,b],[c,d]] සඳහා det = ad − bc. 3×3 සඳහා පළමු පේළිය ඔස්සේ පුළුල් කරයි: a(ei − fh) − b(di − fg) + c(dh − eg). det = 0 නම් matrix එක singular වන අතර එයට inverse නොමැත. Determinant හි නිරපේක්ෂ අගයෙන් රූපයක වර්ගඵලය වෙනස් වන සාධකය දැක්වේ.</p><p class="si"><b>Inverse (ප්‍රතිලෝම):</b> A⁻¹ ඇත්තේ det(A) ≠ 0 නම් පමණි; A × A⁻¹ = I වේ. 2×2 සඳහා A⁻¹ = (1/(ad − bc)) × [[d, −b],[−c, a]]. උදා: [[2,1],[5,3]] හි det = 6 − 5 = 1, ඒ නිසා inverse = [[3,−1],[−5,2]]. (AB)⁻¹ = B⁻¹A⁻¹ වේ.</p><p class="si"><b>Python සහ ක්ෂේත්‍රය:</b> Python වලදී inverse ගණනය කිරීමට පෙර det == 0 දැයි පරීක්ෂා කිරීම, 0 න් බෙදීමේ දෝෂය (division by zero) වළක්වයි. Cybersecurity වලදී Hill cipher හි key matrix එක mod 26 යටතේ inverse ඇති එකක් විය යුතුය; එසේ නොවේ නම් decrypt කළ නොහැක. Decryption යනු inverse matrix එකෙන් ගුණ කිරීමයි.</p></div></section><section class="section" id="sys"><div class="kicker"><div class="num-badge" style="background:var(--blue)">7</div><h2>Linear systems</h2></div><p>A system like <span class="term">2x + y = 5</span>, <span class="term">x + 3y = 10</span> becomes <b>AX = B</b> with A = [[2,1],[1,3]], X = [x,y]ᵀ, B = [5,10]ᵀ. If A is invertible then <b>X = A⁻¹B</b>.</p>
+<div class="tool"><div class="mrow"><div class="mbox"><label>a, b | c (row 1)</label><input class="k s" value="2" style="width:50px"> <input class="k s" value="1" style="width:50px"> | <input class="k s" value="5" style="width:50px"></div>
+<div class="mbox"><label>d, e | f (row 2)</label><input class="k s" value="1" style="width:50px"> <input class="k s" value="3" style="width:50px"> | <input class="k s" value="10" style="width:50px"></div></div>
+<div class="btns"><button class="btn" id="solve">Solve system (inverse method)</button></div><div class="steps" id="solOut">ax + by = c, dx + ey = f</div></div><div class="why"><div class="why-head">🐍 Why this matters for Python</div><p>Solving AX = B is how programs find unknown values from several linear conditions. NumPy does it in one call, but underneath it is the inverse idea (or Cramer's rule) you just learned.</p><div class="why-cols"><div class="why-box se"><div class="why-t">💻 Software engineering</div><ul><li>Linear systems appear in simulations, resource planning and regression (curve fitting)</li><li>Knowing when there is no unique answer (det = 0) prevents silent bugs</li></ul></div><div class="why-box cy"><div class="why-t">🛡️ Cybersecurity</div><ul><li>A known-plaintext attack on the Hill cipher solves a linear system to recover the key</li><li>Linear models estimate risk scores from several measured signals</li></ul></div></div><div class="why-code-label">🐍 Python example</div><pre class="code"><button class="copy-btn" type="button">Copy</button><code># 2x + y = 5  and  x + 3y = 10   (Cramer&#x27;s rule)
+a, b, c = 2, 1, 5
+d, e, f = 1, 3, 10
+det = a * e - b * d
+x = (c * e - b * f) / det
+y = (a * f - c * d) / det
+print(x, y)   # 1.0 3.0</code></pre></div><div class="si-divider"><button class="si-toggle" type="button" data-target="si-matrix-sys" aria-expanded="false"><span class="flag">🇱🇰</span> <span class="si">සිංහල</span> <span class="arrow">▾</span></button></div><div class="si-panel" id="si-matrix-sys"><span class="si-label si">සිංහල විස්තරය</span><p class="si"><b>රේඛීය සමීකරණ පද්ධති:</b> 2x + y = 5 සහ x + 3y = 10 වැනි සමීකරණ දෙකක් AX = B ලෙස ලියයි: A = [[2,1],[1,3]], X = [x, y]ᵀ, B = [5, 10]ᵀ. A හි inverse ඇත්නම් X = A⁻¹B වේ.</p><p class="si"><b>උදාහරණය:</b> det A = 6 − 1 = 5; A⁻¹ = (1/5)[[3,−1],[−1,2]]; X = (1/5)[3·5 − 1·10, −1·5 + 2·10] = [1, 3]. එනම් x = 1, y = 3. පරීක්ෂාව: 2(1) + 3 = 5 සහ 1 + 3(3) = 10 — නිවැරදි ය. det = 0 නම් අනන්‍ය විසඳුමක් නොමැත.</p><p class="si"><b>Python සහ ක්ෂේත්‍රය:</b> Python වලදී NumPy හි numpy.linalg.solve එකෙන් මෙය එක් පේළියකින් කළ හැක; නමුත් එහි පසුපස ඇත්තේ ඔබ ඉගෙන ගත් inverse අදහසයි. Cybersecurity වලදී Hill cipher එකට known-plaintext ප්‍රහාරයක් යනු key එක සොයා ගැනීමට රේඛීය සමීකරණ විසඳීමකි. තවද risk score ගණනය කිරීමේ රේඛීය මොඩල ද මෙයින් ගොඩනැගේ.</p></div></section><section class="section" id="tf"><div class="kicker"><div class="num-badge" style="background:var(--green)">8</div><h2>2D transformations</h2></div><p>A 2×2 matrix transforms every point (x, y) by multiplying. Drag the sliders; the <span class="term" style="color:#8ab4f8">blue</span> house is the transformed shape. M = Rotation · Shear · Scale.</p>
+<div class="tool"><div class="mrow"><canvas id="cv" width="320" height="320"></canvas><div style="flex:1;min-width:230px">
+<div class="sl">Rotate °<input type="range" id="ang" min="-180" max="180" value="0"><span id="angv">0</span></div>
+<div class="sl">Scale x<input type="range" id="sx" min="-2" max="2" step="0.1" value="1"><span id="sxv">1</span></div>
+<div class="sl">Scale y<input type="range" id="sy" min="-2" max="2" step="0.1" value="1"><span id="syv">1</span></div>
+<div class="sl">Shear x<input type="range" id="sh" min="-2" max="2" step="0.1" value="0"><span id="shv">0</span></div>
+<div id="tfm"></div><div class="btns"><button class="btn" id="tfReset">Reset</button></div></div></div></div>
+<div class="callout">Rotation by θ: [[cos θ, −sin θ],[sin θ, cos θ]]. Scale: [[sx,0],[0,sy]]. The determinant of M tells you how the area changes (negative = mirrored).</div><div class="why"><div class="why-head">🐍 Why this matters for Python</div><p>Moving, rotating and scaling shapes is multiplying every point by a small matrix. Python's math module gives you sin and cos.</p><div class="why-cols"><div class="why-box se"><div class="why-t">💻 Software engineering</div><ul><li>UI animation, games and image editors rotate and scale with matrices</li><li>CSS even has a matrix() transform</li></ul></div><div class="why-box cy"><div class="why-t">🛡️ Cybersecurity</div><ul><li>Rotating and scaling images is used to normalise them for forensics and OCR</li><li>CAPTCHAs distort text with transforms; attackers try to undo them</li></ul></div></div><div class="why-code-label">🐍 Python example</div><pre class="code"><button class="copy-btn" type="button">Copy</button><code>import math
+
+def rotate(p, deg):
+    t = math.radians(deg)
+    x, y = p
+    return (x * math.cos(t) - y * math.sin(t),
+            x * math.sin(t) + y * math.cos(t))
+
+print([round(v, 6) for v in rotate((1, 0), 90)])   # [0.0, 1.0]</code></pre></div><div class="si-divider"><button class="si-toggle" type="button" data-target="si-matrix-tf" aria-expanded="false"><span class="flag">🇱🇰</span> <span class="si">සිංහල</span> <span class="arrow">▾</span></button></div><div class="si-panel" id="si-matrix-tf"><span class="si-label si">සිංහල විස්තරය</span><p class="si"><b>2D පරිණාමන (transformations):</b> 2×2 matrix එකකින් (x, y) ලක්ෂ්‍යයක් ගුණ කළ විට නව ස්ථානයට ගමන් කරයි. භ්‍රමණය (rotation) θ කෝණයකින්: [[cos θ, −sin θ],[sin θ, cos θ]]. විශාල කිරීම (scale): [[sx, 0],[0, sy]]. Shear මගින් හැඩය ඇල කරයි.</p><p class="si"><b>සංයුක්ත පරිණාමන:</b> පරිණාමන කිහිපයක් එක matrix එකකට ගුණ කර ඒකාබද්ධ කළ හැක — අනුපිළිවෙල වැදගත් ය (M = R·S යනු පළමුව S, ඉන්පසු R යෙදීමයි). Det M ඍණ නම් රූපය දර්පණ ප්‍රතිබිම්බයක් වේ.</p><p class="si"><b>Python සහ ක්ෂේත්‍රය:</b> Python වල math.sin සහ math.cos භාවිතයෙන් ලක්ෂ්‍ය භ්‍රමණය කළ හැක. Software Engineering වලදී game එකක අක්ෂර චලනය, UI animation සහ image editor වල මෙය භාවිතා වේ. Cybersecurity වලදී forensic රූප සහ OCR සඳහා රූප සාමාන්‍යකරණය (rotate/scale) කිරීම සිදු කරයි; CAPTCHA වල අකුරු විකෘති කරන්නේ ද මෙවැනි පරිණාමන මගිනි.</p></div></section><section class="section" id="quiz"><div class="kicker"><div class="num-badge" style="background:var(--red)">9</div><h2>Practice quiz</h2></div><p>Pick an answer for instant feedback. <span class="score" id="score">Score: 0 / 11</span></p><div id="quizBox"></div><div class="why"><div class="why-head">🐍 Why this matters for Python</div><p>Quick recall practice builds the habit of checking your work, the same habit behind unit tests.</p><div class="why-cols"><div class="why-box se"><div class="why-t">💻 Software engineering</div><ul><li>Each quiz question works like a test case with one expected answer</li><li>The explanation shows why a wrong answer fails, like reading an error message</li></ul></div><div class="why-box cy"><div class="why-t">🛡️ Cybersecurity</div><ul><li>Security work rewards precision: one wrong sign can break a cipher</li><li>Fast recall of the rules helps when reviewing crypto or analysis code</li></ul></div></div></div><div class="si-divider"><button class="si-toggle" type="button" data-target="si-matrix-quiz" aria-expanded="false"><span class="flag">🇱🇰</span> <span class="si">සිංහල</span> <span class="arrow">▾</span></button></div><div class="si-panel" id="si-matrix-quiz"><span class="si-label si">සිංහල විස්තරය</span><p class="si"><b>Quiz එක භාවිතය:</b> පිළිතුරක් තෝරන්න — වහාම නිවැරදි/වැරදි බව සහ පැහැදිලි කිරීම පෙන්වයි. ලකුණු ඉහළට පෙන්වයි. වැරදුණු ප්‍රශ්න සඳහා පැහැදිලි කිරීම කියවා, ඉහත අදාළ කොටසට ආපසු ගොස් නැවත අධ්‍යයනය කරන්න.</p><p class="si"><b>හේතුව:</b> Software Engineering වලදී unit test එකක් යනු අපේක්ෂිත පිළිතුරක් ඇති ප්‍රශ්නයකි; quiz එකද එසේමය. Cybersecurity වලදී එක් ලකුණක් වැරදීමෙන් පවා සංකේතන ක්‍රමය බිඳ වැටෙන නිසා නිරවද්‍යතාව ඉතා වැදගත් ය.</p></div></section><section class="section" id="test"><div class="kicker"><div class="num-badge" style="background:var(--yellow)">10</div><h2>Sample test + answers</h2></div><p>Total <b>26 marks</b>. Attempt each question on paper first, then click to reveal the full worked answer.</p><details><summary>Q1. Let A = [[2,1],[0,3]] and B = [[1,4],[2,−1]]. Find (a) A + B, (b) 2A − B, (c) AB, (d) BA. What does (c) vs (d) show? <span class="marks">[6 marks]</span></summary><div class="ans"><b>Answer:</b>
+(a) A + B = [[3,5],[2,2]]
+(b) 2A = [[4,2],[0,6]], so 2A − B = [[3,−2],[−2,7]]
+(c) AB = [[2·1+1·2, 2·4+1·(−1)],[0·1+3·2, 0·4+3·(−1)]] = [[4,7],[6,−3]]
+(d) BA = [[1·2+4·0, 1·1+4·3],[2·2+(−1)·0, 2·1+(−1)·3]] = [[2,13],[4,−1]]
+AB ≠ BA: matrix multiplication is not commutative.</div></details><details><summary>Q2. Find det of M = [[2,0,1],[1,3,2],[1,1,4]]. Is M invertible? <span class="marks">[4 marks]</span></summary><div class="ans"><b>Answer:</b>
+Expand along row 1:
+det = 2(3·4 − 2·1) − 0(1·4 − 2·1) + 1(1·1 − 3·1)
+    = 2(10) − 0 + 1(−2) = 20 − 2 = 18
+Since det ≠ 0, M is invertible.</div></details><details><summary>Q3. Find the inverse of A = [[4,7],[2,6]] and verify it. <span class="marks">[4 marks]</span></summary><div class="ans"><b>Answer:</b>
+det = 4·6 − 7·2 = 24 − 14 = 10
+A⁻¹ = (1/10)[[6,−7],[−2,4]] = [[0.6,−0.7],[−0.2,0.4]]
+Check row 1 × col 1 of A·A⁻¹: 4(0.6) + 7(−0.2) = 2.4 − 1.4 = 1 ✓ (other entries give 0, 0, 1, so AA⁻¹ = I).</div></details><details><summary>Q4. Solve 2x + y = 5 and x + 3y = 10 using a matrix inverse. <span class="marks">[5 marks]</span></summary><div class="ans"><b>Answer:</b>
+A = [[2,1],[1,3]], det = 6 − 1 = 5, A⁻¹ = (1/5)[[3,−1],[−1,2]]
+X = A⁻¹B = (1/5)[3·5 − 1·10, −1·5 + 2·10] = (1/5)[5, 15] = [1, 3]
+So x = 1, y = 3. Check: 2(1)+3 = 5 ✓, 1+3(3) = 10 ✓.</div></details><details><summary>Q5. Using A and B from Q1, verify (AB)ᵀ = BᵀAᵀ. <span class="marks">[3 marks]</span></summary><div class="ans"><b>Answer:</b>
+AB = [[4,7],[6,−3]] so (AB)ᵀ = [[4,6],[7,−3]].
+Bᵀ = [[1,2],[4,−1]], Aᵀ = [[2,0],[1,3]].
+BᵀAᵀ = [[1·2+2·1, 1·0+2·3],[4·2+(−1)·1, 4·0+(−1)·3]] = [[4,6],[7,−3]] ✓ Equal.</div></details><details><summary>Q6. Find the single matrix M that first scales x by 2 and then rotates 90° anticlockwise. Apply M to the point (1,1). <span class="marks">[4 marks]</span></summary><div class="ans"><b>Answer:</b>
+S = [[2,0],[0,1]], R = [[0,−1],[1,0]]. Apply S first, so M = R·S (order matters!)
+M = [[0·2+(−1)·0, 0·0+(−1)·1],[1·2+0·0, 1·0+0·1]] = [[0,−1],[2,0]]
+M(1,1) = (0·1 − 1·1, 2·1 + 0·1) = (−1, 2).
+Check: S(1,1) = (2,1); R(2,1) = (−1,2) ✓</div></details><div class="why"><div class="why-head">🐍 Why this matters for Python</div><p>Writing out full working on paper is the same skill as writing clear, commented code that others can follow.</p><div class="why-cols"><div class="why-box se"><div class="why-t">💻 Software engineering</div><ul><li>Showing working = readable code and good documentation</li><li>You can turn any answer into an automatic check with assert</li></ul></div><div class="why-box cy"><div class="why-t">🛡️ Cybersecurity</div><ul><li>Analysts must justify each step of a calculation in their reports</li><li>Re-deriving a result by hand is how you spot a faulty tool or script</li></ul></div></div><div class="why-code-label">🐍 Python example</div><pre class="code"><button class="copy-btn" type="button">Copy</button><code># Turn an exam answer into an automatic check
+A = [[2, 1], [0, 3]]
+B = [[1, 4], [2, -1]]
+C = [[sum(A[i][k] * B[k][j] for k in range(2)) for j in range(2)]
+     for i in range(2)]
+assert C == [[4, 7], [6, -3]]
+print(&quot;test passed&quot;)</code></pre></div><div class="si-divider"><button class="si-toggle" type="button" data-target="si-matrix-test" aria-expanded="false"><span class="flag">🇱🇰</span> <span class="si">සිංහල</span> <span class="arrow">▾</span></button></div><div class="si-panel" id="si-matrix-test"><span class="si-label si">සිංහල විස්තරය</span><p class="si"><b>Sample test එක භාවිතය:</b> ප්‍රශ්න 6ක්, ලකුණු 26ක්. මුලින්ම කඩදාසියක පිළිතුරු ලියා, පසුව ප්‍රශ්නය මත click කර සම්පූර්ණ පිළිතුර බලන්න. ලකුණු බෙදා ඇති ආකාරයට අනුව පියවර සියල්ල ලියන්න.</p><p class="si"><b>Python සමඟ:</b> ඔබේ පිළිතුර නිවැරදිදැයි Python assert එකකින් ස්වයංක්‍රීයව පරීක්ෂා කළ හැක. පියවර ලිවීම යනු හොඳින් comment කළ කේතයක් ලිවීමට සමාන කුසලතාවයකි. Cybersecurity වාර්තාවලදී ගණනය කිරීමක සෑම පියවරක්ම පැහැදිලි කිරීම අවශ්‍ය වේ.</p></div></section><section class="section" id="cheat"><div class="kicker"><div class="num-badge" style="background:var(--purple)">11</div><h2>Cheat sheet</h2></div><div class="table-wrap"><table class="ctable"><tr><th>Topic</th><th>Rule</th></tr>
+<tr><td>Size</td><td>m×n = rows × columns</td></tr><tr><td>Add / subtract</td><td>Same size, entry by entry</td></tr>
+<tr><td>Multiply</td><td>(m×n)(n×p) = m×p; row · column; AB ≠ BA</td></tr><tr><td>Transpose</td><td>(AB)ᵀ = BᵀAᵀ, (Aᵀ)ᵀ = A</td></tr>
+<tr><td>2×2 det</td><td>ad − bc</td></tr><tr><td>2×2 inverse</td><td>(1/det)·[[d,−b],[−c,a]]</td></tr>
+<tr><td>Inverse of product</td><td>(AB)⁻¹ = B⁻¹A⁻¹</td></tr><tr><td>Solve AX = B</td><td>X = A⁻¹B when det A ≠ 0</td></tr></table></div><div class="why"><div class="why-head">🐍 Why this matters for Python</div><p>A cheat sheet works like API documentation: you do not memorise every rule, you know where to look.</p><div class="why-cols"><div class="why-box se"><div class="why-t">💻 Software engineering</div><ul><li>Quick reference while writing matrix functions</li><li>Helps you spot which formula a task needs</li></ul></div><div class="why-box cy"><div class="why-t">🛡️ Cybersecurity</div><ul><li>Fast lookup when reading cipher or analysis code</li><li>Reminds you of the conditions (square, det ≠ 0, matching sizes) that must be checked</li></ul></div></div></div><div class="si-divider"><button class="si-toggle" type="button" data-target="si-matrix-cheat" aria-expanded="false"><span class="flag">🇱🇰</span> <span class="si">සිංහල</span> <span class="arrow">▾</span></button></div><div class="si-panel" id="si-matrix-cheat"><span class="si-label si">සිංහල විස්තරය</span><p class="si"><b>Cheat sheet:</b> matrix ක්‍රියා සඳහා වැදගත් සූත්‍ර එක තැනක ඇත. කේතයක් ලියන විට හෝ test එකට පෙර ඉක්මනින් පරීක්ෂා කිරීමට භාවිතා කරන්න. සෑම ක්‍රියාවකටම ඇති කොන්දේසි (ප්‍රමාණය ගැළපීම, square වීම, det ≠ 0) අමතක නොකරන්න — Python කේතයේ ද මේවා if පරීක්ෂා ලෙස ලිවිය යුතුය.</p></div></section></main></div>
+<footer><a href="index.html">🏠 Back to Maths Index</a> · <a href="differentiation.html">Next: Differentiation →</a> · <a href="differentiation.html">Next: Differentiation →</a> · <a href="differentiation.html">Next: Differentiation →</a> · <a href="differentiation.html">Next: Differentiation →</a> · <a href="#overview">Back to top ↑</a></footer>
+<script>
+const $=s=>document.querySelector(s);
+function F(x){if(Math.abs(x)<1e-10)return'0';for(let d=1;d<=12;d++){const n=x*d;if(Math.abs(n-Math.round(n))<1e-9)return d==1?''+Math.round(n):Math.round(n)+'/'+d}return(+x.toFixed(4))+''}
+const S={A:{r:2,c:2,v:[[2,1,0],[0,3,0],[0,0,0]]},B:{r:2,c:2,v:[[1,4,0],[2,-1,0],[0,0,0]]}};
+function buildBox(id,nm){const s=S[nm];let h='<label>Matrix '+nm+' &nbsp; rows <select data-n="'+nm+'" data-d="r">'+[1,2,3].map(x=>'<option'+(x==s.r?' selected':'')+'>'+x+'</option>').join('')+'</select> cols <select data-n="'+nm+'" data-d="c">'+[1,2,3].map(x=>'<option'+(x==s.c?' selected':'')+'>'+x+'</option>').join('')+'</select></label><table class="mx">';
+for(let i=0;i<s.r;i++){h+='<tr>';for(let j=0;j<s.c;j++)h+='<td><input type="number" data-n="'+nm+'" data-i="'+i+'" data-j="'+j+'" value="'+s.v[i][j]+'"></td>';h+='</tr>'}
+$(id).innerHTML=h+'</table>'}
+function build(){buildBox('#boxA','A');buildBox('#boxB','B')}
+document.addEventListener('change',e=>{const t=e.target;if(t.tagName=='SELECT'&&t.dataset.n){S[t.dataset.n][t.dataset.d]=+t.value;build()}});
+document.addEventListener('input',e=>{const t=e.target;if(t.dataset&&t.dataset.i!==undefined){S[t.dataset.n].v[+t.dataset.i][+t.dataset.j]=parseFloat(t.value)||0}});
+const get=n=>{const s=S[n];return Array.from({length:s.r},(_,i)=>s.v[i].slice(0,s.c))};
+const mt=M=>'<table class="mx">'+M.map(r=>'<tr>'+r.map(x=>'<td class="v">'+F(x)+'</td>').join('')+'</tr>').join('')+'</table>';
+const sz=M=>M.length+'×'+M[0].length;
+function det(M){const n=M.length;if(n==1)return M[0][0];if(n==2)return M[0][0]*M[1][1]-M[0][1]*M[1][0];let d=0;for(let j=0;j<n;j++)d+=(j%2?-1:1)*M[0][j]*det(M.slice(1).map(r=>r.filter((_,k)=>k!=j)));return d}
+function inv(M){const n=M.length,d=det(M);if(Math.abs(d)<1e-12)return null;if(n==1)return[[1/d]];const C=M.map((r,i)=>r.map((_,j)=>((i+j)%2?-1:1)*det(M.filter((_,a)=>a!=i).map(rr=>rr.filter((_,b)=>b!=j)))));return C[0].map((_,j)=>C.map(r=>r[j]/d))}
+const mul=(A,B)=>A.map(r=>B[0].map((_,j)=>r.reduce((s,x,k)=>s+x*B[k][j],0)));
+function run(op){const A=get('A'),B=get('B'),k=parseFloat($('#k').value)||0;let o='',st='';
+const bad=m=>{o='<b style="color:#f28b82">'+m+'</b>';st='Not defined.'};
+if(op=='add'||op=='sub'){if(sz(A)!=sz(B))return bad('Sizes differ ('+sz(A)+' vs '+sz(B)+') — not defined.');const s=op=='add'?1:-1;const C=A.map((r,i)=>r.map((x,j)=>x+s*B[i][j]));o=mt(C);st=C.map((r,i)=>r.map((_,j)=>'c'+(i+1)+(j+1)+' = '+F(A[i][j])+(s>0?' + ':' − ')+F(B[i][j])+' = '+F(C[i][j])).join('   ')).join('\n')}
+else if(op=='scale'){const C=A.map(r=>r.map(x=>k*x));o=mt(C);st='Multiply every entry of A by k = '+F(k)+'\n'+C.map((r,i)=>r.map((_,j)=>F(k)+'·'+F(A[i][j])+' = '+F(C[i][j])).join('   ')).join('\n')}
+else if(op=='mul'){if(A[0].length!=B.length)return bad('A is '+sz(A)+', B is '+sz(B)+': columns of A must equal rows of B — not defined.');const C=mul(A,B);o=mt(C);st='Result is '+C.length+'×'+C[0].length+'\n'+C.map((r,i)=>r.map((_,j)=>'c'+(i+1)+(j+1)+' = '+A[i].map((x,m)=>F(x)+'·'+F(B[m][j])).join(' + ')+' = '+F(C[i][j])).join('\n')).join('\n')}
+else if(op=='tr'){const T=A[0].map((_,j)=>A.map(r=>r[j]));o=mt(T);st='Rows become columns: A is '+sz(A)+', Aᵀ is '+sz(T)}
+else{if(A.length!=A[0].length)return bad('Matrix A must be square.');const n=A.length,d=det(A);
+if(op=='det'){o='det(A) = <span class="score">'+F(d)+'</span>';st=n==2?'ad − bc = ('+F(A[0][0])+')('+F(A[1][1])+') − ('+F(A[0][1])+')('+F(A[1][0])+') = '+F(d):n==3?'Expand along row 1:\n'+[0,1,2].map(j=>(j%2?'− ':'+ ')+'('+F(A[0][j])+')·det[minor'+(j+1)+'] = '+(j%2?'−':'+')+F(A[0][j])+'·'+F(det(A.slice(1).map(r=>r.filter((_,k)=>k!=j))))).join('\n')+'\ndet = '+F(d):'1×1: det = the entry.';st+=Math.abs(d)<1e-12?'\nDeterminant is 0 → singular, no inverse.':'\nNon-zero → invertible.'}
+else{const I=inv(A);if(!I){o='<b style="color:#f28b82">det(A) = 0 — no inverse (singular).</b>';st='A⁻¹ = (1/det A)·adj(A); here det A = 0 so it does not exist.'}else{o=mt(I);st='det(A) = '+F(d)+'\nA⁻¹ = (1/'+F(d)+') · adj(A)\nCheck A·A⁻¹ =\n'+mul(A,I).map(r=>r.map(x=>F(x)).join('  ')).join('\n')}}}
+$('#out').innerHTML=o;$('#steps').textContent=st;
+document.querySelectorAll('#ops .btn').forEach(b=>b.classList.toggle('on',b.dataset.op==op));$('#steps').innerHTML=$('#steps').textContent.replace(/&/g,'&amp;').replace(/</g,'&lt;')}
+document.querySelectorAll('#ops .btn').forEach(b=>b.onclick=()=>run(b.dataset.op));
+$('#loadEx').onclick=()=>{S.A={r:2,c:2,v:[[2,1,0],[0,3,0],[0,0,0]]};S.B={r:2,c:2,v:[[1,4,0],[2,-1,0],[0,0,0]]};build();run('mul');$('#lab').scrollIntoView()};
+build();
+$('#solve').onclick=()=>{const v=[...document.querySelectorAll('.s')].map(i=>parseFloat(i.value)||0);const A=[[v[0],v[1]],[v[3],v[4]]],B=[[v[2]],[v[5]]],d=det(A);
+$('#solOut').textContent=Math.abs(d)<1e-12?'det A = 0: no unique solution.':(()=>{const I=inv(A),X=mul(I,B);return'A = ['+A.map(r=>r.map(F).join(', ')).join(' ; ')+'], det A = '+F(d)+'\nA⁻¹ = ['+I.map(r=>r.map(F).join(', ')).join(' ; ')+']\nX = A⁻¹B → x = '+F(X[0][0])+', y = '+F(X[1][0])})()};
+// transforms
+const cv=$('#cv'),cx=cv.getContext('2d'),U=40;const shape=[[0,0],[1,0],[1,1],[.5,1.6],[0,1]];
+function tf(){const a=+$('#ang').value*Math.PI/180,sx=+$('#sx').value,sy=+$('#sy').value,sh=+$('#sh').value;
+$('#angv').textContent=$('#ang').value;$('#sxv').textContent=sx;$('#syv').textContent=sy;$('#shv').textContent=sh;
+const R=[[Math.cos(a),-Math.sin(a)],[Math.sin(a),Math.cos(a)]],M=mul(R,mul([[1,sh],[0,1]],[[sx,0],[0,sy]]));
+cx.clearRect(0,0,320,320);cx.strokeStyle='#2c2d30';cx.lineWidth=1;for(let i=-4;i<=4;i++){cx.beginPath();cx.moveTo(160+i*U,0);cx.lineTo(160+i*U,320);cx.moveTo(0,160+i*U);cx.lineTo(320,160+i*U);cx.stroke()}
+cx.strokeStyle='#5f6368';cx.beginPath();cx.moveTo(160,0);cx.lineTo(160,320);cx.moveTo(0,160);cx.lineTo(320,160);cx.stroke();
+const draw=(P,c,f)=>{cx.beginPath();P.forEach((p,i)=>{const X=160+p[0]*U,Y=160-p[1]*U;i?cx.lineTo(X,Y):cx.moveTo(X,Y)});cx.closePath();cx.fillStyle=f;cx.fill();cx.strokeStyle=c;cx.lineWidth=2;cx.stroke()};
+draw(shape,'#9aa0a6','rgba(154,160,166,.15)');draw(shape.map(p=>[M[0][0]*p[0]+M[0][1]*p[1],M[1][0]*p[0]+M[1][1]*p[1]]),'#8ab4f8','rgba(138,180,248,.3)');
+$('#tfm').innerHTML='<b>M =</b>'+mt(M.map(r=>r.map(x=>+x.toFixed(2))))+'<div style="font-size:13px;color:#9aa0a6">det M = '+(M[0][0]*M[1][1]-M[0][1]*M[1][0]).toFixed(2)+' (area factor)</div>'}
+['ang','sx','sy','sh'].forEach(i=>$('#'+i).oninput=tf);
+$('#tfReset').onclick=()=>{$('#ang').value=0;$('#sx').value=1;$('#sy').value=1;$('#sh').value=0;tf()};tf();
+
+// add/sub practice
+let P=null;
+function gen(){const r=()=>Math.floor(Math.random()*9)-3,mk=()=>[[r(),r()],[r(),r()]];const A=mk(),B=mk(),k=Math.floor(Math.random()*4)+2,t=Math.floor(Math.random()*3);
+P={A,B,k,t};const m=x=>'['+x.map(r=>r.join(', ')).join(' ; ')+']';
+$('#prob').innerHTML=(t==0?'Find <b>A + B</b>':t==1?'Find <b>A − B</b>':'Find <b>'+k+'A</b>')+'<br><span class="term">A = '+m(A)+'</span>'+(t<2?' <span class="term">B = '+m(B)+'</span>':'')+' <span style="font-size:12px;color:#9aa0a6">(rows separated by ;)</span>';
+$('#probA').innerHTML='<table class="mx">'+[0,1].map(i=>'<tr>'+[0,1].map(j=>'<td><input type="number" class="pa" data-i="'+i+'" data-j="'+j+'"></td>').join('')+'</tr>').join('')+'</table>';
+$('#probFb').textContent='Work it out, fill all four boxes, then check.'}
+const ans=()=>P.t==0?P.A.map((r,i)=>r.map((x,j)=>x+P.B[i][j])):P.t==1?P.A.map((r,i)=>r.map((x,j)=>x-P.B[i][j])):P.A.map(r=>r.map(x=>P.k*x));
+$('#gen').onclick=gen;
+$('#chk').onclick=()=>{if(!P)return gen();const a=ans();let ok=0,bad=[];document.querySelectorAll('.pa').forEach(e=>{const i=+e.dataset.i,j=+e.dataset.j;if(e.value!==''&&parseFloat(e.value)==a[i][j])ok++;else bad.push('row '+(i+1)+', col '+(j+1))});
+$('#probFb').textContent=ok==4?'Correct! All four boxes right. ✓':ok+' of 4 boxes right. Check: '+bad.join('; ')+'.\nTip: work box by box, and watch your signs.'};
+$('#showAns').onclick=()=>{if(!P)return gen();$('#probFb').textContent='Answer = ['+ans().map(r=>r.join(', ')).join(' ; ')+']\n'+ans().map((r,i)=>r.map((x,j)=>(P.t==0?P.A[i][j]+' + ('+P.B[i][j]+')':P.t==1?P.A[i][j]+' − ('+P.B[i][j]+')':P.k+' × ('+P.A[i][j]+')')+' = '+x).join('   ')).join('\n')};
+$('#loadAS').onclick=()=>{S.A={r:2,c:2,v:[[2,1,0],[0,3,0],[0,0,0]]};S.B={r:2,c:2,v:[[5,4,0],[2,1,0],[0,0,0]]};build();run('add');$('#lab').scrollIntoView()};
+gen();
+// quiz
+const Q=[["Add [[1,2],[3,4]] + [[5,0],[−1,2]].",["[[6,2],[2,6]]","[[6,2],[4,6]]","[[4,2],[2,6]]","Not defined"],0,"Add matching boxes: 1+5=6, 2+0=2, 3+(−1)=2, 4+2=6."],
+["Which can you NOT do?",["2×3 matrix + 2×3 matrix","2×2 matrix − 2×2 matrix","2×3 matrix + 3×2 matrix","3 × (2×2 matrix)"],2,"Addition needs identical sizes; 2×3 and 3×2 are different."],
+["3 × [[1,−2],[0,4]] = ?",["[[3,−6],[0,12]]","[[3,−2],[0,4]]","[[4,1],[3,7]]","[[3,−6],[0,4]]"],0,"Multiply every entry by 3, including the zero."],["A is 2×3 and B is 3×4. What is the size of AB?",["2×4","3×3","2×3","Not defined"],0,"(2×3)(3×4): inner sizes match (3), result is outer sizes 2×4."],
+["det [[3,2],[1,4]] = ?",["14","10","12","5"],1,"ad − bc = 3·4 − 2·1 = 12 − 2 = 10."],
+["Transpose of [[1,2],[3,4]] is…",["[[1,3],[2,4]]","[[4,3],[2,1]]","[[1,2],[3,4]]","[[2,1],[4,3]]"],0,"Swap rows and columns: first row becomes first column."],
+["Which matrix has NO inverse?",["[[1,0],[0,1]]","[[2,1],[1,1]]","[[2,4],[1,2]]","[[3,0],[0,2]]"],2,"det = 2·2 − 4·1 = 0, so it is singular."],
+["[[1,2],[0,1]] × [3,4]ᵀ = ?",["[[11],[4]]","[[7],[4]]","[[3],[8]]","[[11],[8]]"],0,"Row 1: 1·3 + 2·4 = 11. Row 2: 0·3 + 1·4 = 4."],
+["(AB)ᵀ equals…",["AᵀBᵀ","BᵀAᵀ","ABᵀ","BAᵀ"],1,"Transposing reverses the order of a product."],
+["Inverse of [[2,1],[5,3]] is…",["[[3,−1],[−5,2]]","[[3,1],[5,2]]","[[2,−1],[−5,3]]","[[−3,1],[5,−2]]"],0,"det = 6 − 5 = 1, so A⁻¹ = [[3,−1],[−5,2]]."],
+["Which matrix rotates points 90° anticlockwise?",["[[0,1],[−1,0]]","[[0,−1],[1,0]]","[[1,0],[0,−1]]","[[−1,0],[0,−1]]"],1,"(1,0) → (0,1) with [[0,−1],[1,0]]; the other options rotate clockwise, reflect, or rotate 180°."]];
+let sc=0,done=0;const qb=$('#quizBox');
+Q.forEach((q,i)=>{const d=document.createElement('div');d.className='q';d.innerHTML='<div class="qt">'+(i+1)+'. '+q[0]+'</div>'+q[1].map((o,j)=>'<button class="opt" data-j="'+j+'">'+o+'</button>').join('')+'<div class="exp"></div>';
+d.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{if(d.dataset.done)return;d.dataset.done=1;const j=+b.dataset.j;done++;if(j==q[2]){sc++;b.classList.add('good')}else{b.classList.add('bad');d.querySelectorAll('.opt')[q[2]].classList.add('good')}
+const e=d.querySelector('.exp');e.textContent=q[3];e.classList.add('show');$('#score').textContent='Score: '+sc+' / '+Q.length+(done==Q.length?' — finished!':'')});qb.appendChild(d)});
+// scroll spy
+const L=[...document.querySelectorAll('nav.toc a')];const spy=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){L.forEach(l=>l.classList.toggle('active',l.getAttribute('href')=='#'+en.target.id))}}),{rootMargin:'-15% 0px -70% 0px'});document.querySelectorAll('.section').forEach(s=>spy.observe(s));
+</script><script>
+document.querySelectorAll('.si-toggle').forEach(function(btn){btn.addEventListener('click',function(){var p=document.getElementById(btn.getAttribute('data-target'));if(!p)return;var o=p.classList.toggle('open');btn.setAttribute('aria-expanded',o?'true':'false')})});
+document.querySelectorAll('.copy-btn').forEach(function(b){b.addEventListener('click',function(){var c=b.parentNode.querySelector('code').innerText;var d=function(){b.textContent='Copied';b.classList.add('done');setTimeout(function(){b.textContent='Copy';b.classList.remove('done')},1400)};if(navigator.clipboard){navigator.clipboard.writeText(c).then(d,function(){})}else{d()}})});
+</script></body></html>
